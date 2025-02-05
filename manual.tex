@@ -711,8 +711,8 @@ To be able to handle 16-bit data efficiently, we need a variety of 16-bit load i
 \begin{tabular}{l l l}
 Assembler code                   & Operation                   & f8l \\
 \texttt{ldw y, x}                & \texttt{y = x}              & Yes \\
-\texttt{ldw y, z}                & \texttt{x = z}              & Yes \\
-\texttt{ldw z, x}                & \texttt{x = z}              & Yes \\
+\texttt{ldw y, z}                & \texttt{y = z}              & Yes \\
+\texttt{ldw z, x}                & \texttt{z = x}              & Yes \\
 \texttt{ldw x, z}                & \texttt{x = z}              & Yes \\
 \texttt{ldw x, y}                & \texttt{x = y}              & Yes \\
 \texttt{ldw z, y}                & \texttt{z = y}              & Yes \\
@@ -1022,7 +1022,7 @@ none (\texttt{addw sp, \#d}) or \texttt{cnzo} (all others).
 
 \subsubsection*{Rationale}
 
-THis instruction allows to effcieintly adjust the stack pointer, which is useful for the setup of the stack at the beginning of functions,and stack cleanup at the end of a function or after a function call.
+This instruction allows to effcieintly adjust the stack pointer, which is useful for the setup of the stack at the beginning of functions,and stack cleanup at the end of a function or after a function call.
 
 
 \subsection{boolw: 16-bit cast to bool}
@@ -1150,7 +1150,7 @@ Assembler code & Operation            & f8l \\
 
 \subsubsection*{Rationale}
 
-Multiplications are common, both explicitly and in array indexing. For efficient use of data memory, structs should not be padded, thus accessing arrays of structs often requires multiplications with factors that are not apoer of two. This instruction allows to do these multiplications efficiently. The effect of the carry flag ismotivated by the use of this instruction together with \texttt{mad} for wider multiplications.
+Multiplications are common, both explicitly and in array indexing. For efficient use of data memory, structs should not be padded, thus accessing arrays of structs often requires multiplications with factors that are not a power of two. This instruction allows to do these multiplications efficiently. The effect of the carry flag ismotivated by the use of this instruction together with \texttt{mad} for wider multiplications.
 
 
 \subsection{popw: 16-bit pop from stack}
@@ -1374,7 +1374,7 @@ none
 
 \subsubsection*{Rationale}
 
-Having a jumpinstruction instruction is very useful to implement control-flow. Jumps are common, and most of them have a nearby target, making it worth having a relative jump instruction.
+Having a jump instruction is very useful to implement control-flow. Jumps are common, and most of them have a nearby target, making it worth having a relative jump instruction.
 
 
 \subsection{jrc: jump on carry}
@@ -1390,7 +1390,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the carry flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as furhter jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the carry flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
 
 
 \subsection{jrgt: jump on greater}
@@ -1422,7 +1422,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the carry flag together with the z flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as furhter jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the carry flag together with the z flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
 
 
 \subsection{jrn: jump on negative}
@@ -1438,7 +1438,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the n flag are useful for implementing common unsigned comparisons with 0, some bit tests, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as furhter jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the n flag are useful for implementing common unsigned comparisons with 0, some bit tests, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
 
 
 \subsection{jrnc: jump on no carry}
@@ -1518,7 +1518,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the n flag are useful for implementing signed comparisons wide than the operands of the available compare and subtraction instructions, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as furhter jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the n flag are useful for implementing signed comparisons wide than the operands of the available compare and subtraction instructions, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
 
 
 \subsection{jrsge: jump on signed greater or equal}
@@ -1564,7 +1564,7 @@ Assembler code   & Operation                                  & f8l \\
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the z, n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as furhter jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the z, n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
 
 
 \subsection{jrslt: jump on signed less}
@@ -1580,7 +1580,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as furhter jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
 
 
 \subsection{jrz: jump on zero}
@@ -1596,7 +1596,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the zero flag are useful for implementing common tests for 0, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as furhter jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the zero flag are useful for implementing common tests for 0, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
 
 
 \subsection{ret: return}
@@ -1644,12 +1644,12 @@ Assembler code  & Operation  & f8l \\
 
 \subsubsection*{Rationale}
 
-Some bugs, including many security-relevant ones can lead to the execution of codd from memory used for data. Many exploits actually rely on data commonly being zero, and \texttt{nop} having opcode 0. By making opcode 0 a \texttt{trap} instruction, we can mitigate the impact of such bugs, and make them easier to debug.
+Some bugs, including many security-relevant ones can lead to the execution of code from memory used for data. Many exploits actually rely on data commonly being zero, and \texttt{nop} having opcode 0. By making opcode 0 a \texttt{trap} instruction, we can mitigate the impact of such bugs, and make them easier to debug.
 
 
 \section{Non-instructions}
 
-A 16-bit bitwise and \texttt{andw} would not be as useful as \texttt{orw} and \texttt{xorw}: kown 0x00 or 0xff bytes are more common for bitwise and, so the compiler will often use \texttt{ld}, \texttt{ldw}, \texttt{clr} and \texttt{clrw}, and handle the rest with 8-bit \texttt{and}.
+A 16-bit bitwise and \texttt{andw} would not be as useful as \texttt{orw} and \texttt{xorw}: known 0x00 or 0xff bytes are more common for bitwise and, so the compiler will often use \texttt{ld}, \texttt{ldw}, \texttt{clr} and \texttt{clrw}, and handle the rest with 8-bit \texttt{and}.
 
 Hardware multiplication is costly, so there are no instructions requiring a multiplier wider than 8 times 8 to 16. Instead, the \texttt{mad} instruction is provided for efficient use of the 8 times 8 to 16 multiplier when implementing wider multiplications. Division is less common than multiplication, but complex or costly to implement in hardware.
 
