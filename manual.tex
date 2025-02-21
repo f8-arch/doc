@@ -96,9 +96,9 @@ There are three 16-bit general-purpose registers, each consisting of two 8.bit r
 
 \section{Instructions}
 
-The leightweight f8 instruction subset f8l is meant for smaller cores. This simplification comes at the cost of a reduction in performance and an increase in code size.
+The lightweight f8 instruction subset f8l is meant for smaller cores. This simplification comes at the cost of a reduction in performance and an increase in code size.
 
-Instructions have up to 3 source and up to 2 destination operands. At most one source and one destination operand are in memory. All destination operands in general-purpose registers need to be one 16 bit register or part of the same 16-bit genral-purpose register.
+Instructions have up to 3 source and up to 2 destination operands. At most one source and one destination operand are in memory. All destination operands in general-purpose registers need to be one 16-bit register or part of the same 16-bit general-purpose register.
 
 Each instruction is encoded by 1 to 4 bytes: an optional prefix byte is followed by the opcode byte and 0 to 2 operand bytes.
 
@@ -107,11 +107,11 @@ There are 8 prefix bytes:
 \begin{tabular}{l l l}
 Prefix & semantics & group \\
 \texttt{swapop} & swap operands & 0 \\
-\texttt{altacc1} & alternative acumulator \texttt{xh} instead of \texttt{xl} & 1 \\
-\texttt{altacc2} & alternative acumulator \texttt{yl} instead of \texttt{xl}, \texttt{z} instead of \texttt{y} & 2 \\
-\texttt{altacc4} & alternative acumulator \texttt{yh} instead of \texttt{xl}, \texttt{z} instead of \texttt{y} & 2 \\
-\texttt{altacc3} & alternative acumulator \texttt{zl} instead of \texttt{xl}, \texttt{x} instead of \texttt{y} & 2 \\
-\texttt{altacc5} & alternative acumulator \texttt{zh} instead of \texttt{xl} & 2
+\texttt{altacc1} & alternative accumulator \texttt{xh} instead of \texttt{xl} & 1 \\
+\texttt{altacc2} & alternative accumulator \texttt{yl} instead of \texttt{xl}, \texttt{z} instead of \texttt{y} & 2 \\
+\texttt{altacc4} & alternative accumulator \texttt{yh} instead of \texttt{xl}, \texttt{z} instead of \texttt{y} & 2 \\
+\texttt{altacc3} & alternative accumulator \texttt{zl} instead of \texttt{xl}, \texttt{x} instead of \texttt{y} & 2 \\
+\texttt{altacc5} & alternative accumulator \texttt{zh} instead of \texttt{xl} & 2
 \end{tabular}
 
 \section{Addressing Modes}
@@ -121,7 +121,7 @@ Prefix & semantics & group \\
 \texttt{x}, \texttt{y}, \texttt{z}, \texttt{sp} & 16-bit register \\
 \texttt{\#i} & 8-bit immediate \\
 \texttt{\#ii} & 16-bit immediate \\
-\texttt{\#d} & 8-bit immediate sign-extended to 16 bit \\
+\texttt{\#d} & 8-bit immediate sign-extended to 16-bit \\
 \texttt{mm} & direct \\
 \texttt{(n, sp)}, \texttt{(n, y)} & indexed with 8-bit offset \\
 \texttt{(nn, z)} & indexed with 16-bit offset \\
@@ -264,7 +264,7 @@ Assembler code               & Operation                              & f8l \\
 
 Todo: Document possible altacc prefixes.
 
-\subsection{adcw: 16 bit addition with carry}
+\subsection{adcw: 16-bit addition with carry}
 
 \begin{tabular}{l l l}
 Assembler code              & Operation                              & f8l \\
@@ -277,7 +277,7 @@ Assembler code              & Operation                              & f8l \\
 \texttt{cnzo}
 
 
-\subsection{addw: 16 bit addition}
+\subsection{addw: 16-bit addition}
 
 \begin{tabular}{l l l}
 Assembler code              & Operation                          & f8l \\
@@ -290,7 +290,7 @@ Assembler code              & Operation                          & f8l \\
 \texttt{cnzo}
 
 
-\subsection{orw: 16 bit bitwise or}
+\subsection{orw: 16-bit bitwise or}
 
 todo: do we really want the effect on o here? If yes, why not on the 8-bit logic ops?
 
@@ -305,7 +305,7 @@ Assembler code             & Operation                          & f8l \\
 \texttt{nzo}
 
 
-\subsection{sbcw: 16 bit subtraction with carry}
+\subsection{sbcw: 16-bit subtraction with carry}
 
 \begin{tabular}{l l l}
 Assembler code              & Operation                             & f8l \\
@@ -318,7 +318,7 @@ Assembler code              & Operation                             & f8l \\
 \texttt{cnzo}
 
 
-\subsection{subw: 16 bit subtraction}
+\subsection{subw: 16-bit subtraction}
 
 \begin{tabular}{l l l}
 Assembler code              & Operation                             & f8l \\
@@ -331,7 +331,7 @@ Assembler code              & Operation                             & f8l \\
 \texttt{cnzo}
 
 
-\subsection{xorw: 16 bit bitwise exclusive or}
+\subsection{xorw: 16-bit bitwise exclusive or}
 
 todo: do we really want the effect on o here? If yes, why not on the 8-bit logic ops?
 
@@ -405,7 +405,7 @@ none
 
 \subsubsection*{Rationale}
 
-8-bit stack parameters can be passed easily via this instruction. Registers can be saved temporarily (e.g. for the duration of a function call, or in the middle of a complex computation). Not affecting flags makes the instruction more useful for saving registers in the middle of a long addition/subtraction/comparison/multiplication.
+8-bit stack parameters can be passed easily via this instruction. Registers can be saved temporarily (e.g. for the duration of a function call, or in the middle of a complex computation). Not affecting flags makes the instruction more useful for saving registers in the middle of a long addition\slash subtraction\slash comparison\slash multiplication.
 
 
 \subsection{sll: 8-bit shift left logical}
@@ -479,9 +479,9 @@ Assembler code       & Operation        & f8l \\
 Testing a variable for zero or being nonnegative is common. We also want a way to check parity and reset the carry flag. Making that a side-effect in this instructions saves opcodes for other uses.
 
 
-\section{16-bit 1-operand-instructions}
+\section{16-bit 1-operand instructions}
 
-\subsection{adcw: 16 bit addition with carry}
+\subsection{adcw: 16-bit addition with carry}
 
 \begin{tabular}{l l l}
 Assembler code         & Operation                        & f8l \\
@@ -546,7 +546,7 @@ none
 
 \subsubsection*{Rationale}
 
-16-bit stack parameters can be passed easily via this instruction. Registers can be saved temporarily for a function call, or in the middle of wider arithmetic operations; for the latter use, it is important that this instruction doesnot affect any flags.
+16-bit stack parameters can be passed easily via this instruction. Registers can be saved temporarily for a function call, or in the middle of wider arithmetic operations; for the latter use, it is important that this instruction does not affect any flags.
 
 
 \subsection{sbcw: 16-bit subtraction with carry}
@@ -775,7 +775,7 @@ Assembler code                 & Operation                            & f8l \\
 
 \subsubsection*{Rationale}
 
-When aiming for memory-efficiency, it is important to be able to chose the smallest type that can hold the data without incurring a code size or performance penalty. This instruction allows efficient up-casts of signed numbers.
+When aiming for memory efficiency, it is important to be able to chose the smallest type that can hold the data without incurring a code size or performance penalty. This instruction allows efficient up-casts of signed numbers.
 
 
 \subsection{zex: zero-extend}
@@ -790,7 +790,9 @@ Assembler code                 & Operation                   & f8l \\
 
 \texttt{z}
 
-When aiming for memory-efficiency, it is important to be able to chose the smallest type that can hold the data without incurring a code size or performance penalty. This instruction help implement efficient up-casts of unsigned numbers. Its benefits are not as big as those of \texttt{sex} per individual upcast, but onthe other hand, unsigned numbers are used more commonly, thus unsigned upcasts are more common.
+\subsubsection*{Rationale}
+
+When aiming for memory efficiency, it is important to be able to chose the smallest type that can hold the data without incurring a code size or performance penalty. This instruction help implement efficient up-casts of unsigned numbers. Its benefits are not as big as those of \texttt{sex} per individual upcast, but onthe other hand, unsigned numbers are used more commonly, thus unsigned upcasts are more common.
 
 
 \section{Other 8-bit instructions}
@@ -848,7 +850,7 @@ Assembler code      & Operation & f8l \\
 
 \subsubsection*{Rationale}
 
-While the binary-coded-decimal (BCD) representation of numbers if mostly obsolete today, this instruction still has a use: it allows efficient conversion from binary to BCD, and thus to ASCII. This can substantially speed up the printing of numbers, considering that the f8 does not have division or modulo hardware.
+While the binary-coded-decimal (BCD) representation of numbers is mostly obsolete today, this instruction still has a use: it allows efficient conversion from binary to BCD, and thus to ASCII. This can substantially speed up the printing of numbers, considering that the f8 does not have division or modulo hardware.
 
 
 \subsubsection*{Affected Flags}
@@ -891,7 +893,7 @@ Assembler code                        & Operation                               
 
 \subsubsection*{Rationale}
 
-Bit-fields are an important tool to reduce data memory usage. This instruction allows for substantially better code for writing bit-fields, and for writing parts of i/o registers. Due to its effect on the z flag, it also can be used as a single bit exchange instruction, which can be useful on memory-mapped i/o.
+Bit-fields are an important tool to reduce data memory usage. This instruction allows for substantially better code for writing bit-fields, and for writing parts of I/O registers. Due to its effect on the z flag, it also can be used as a single bit exchange instruction, which can be useful on memory-mapped I/O.
 
 
 \subsection{pop: 8-bit pop from stack}
@@ -908,7 +910,7 @@ none
 
 \subsubsection*{Rationale}
 
-Registers that were saved temporarily via a \texttt{push} can be restored by this instruction. Not affecting flags makes the instruction more useful for restoring registers after a comparison before a conditional jump, or in the middle of a long addition/subtraction/multiplication.
+Registers that were saved temporarily via a \texttt{push} can be restored by this instruction. Not affecting flags makes the instruction more useful for restoring registers after a comparison before a conditional jump, or in the middle of a long addition\slash subtraction\slash multiplication.
 
 
 \subsection{push: 8-bit push onto stack}
@@ -1022,7 +1024,7 @@ none (\texttt{addw sp, \#d}) or \texttt{cnzo} (all others).
 
 \subsubsection*{Rationale}
 
-This instruction allows to effcieintly adjust the stack pointer, which is useful for the setup of the stack at the beginning of functions,and stack cleanup at the end of a function or after a function call.
+This instruction allows to efficiently adjust the stack pointer, which is useful for the setup of the stack at the beginning of functions and stack cleanup at the end of a function or after a function call.
 
 
 \subsection{boolw: 16-bit cast to bool}
@@ -1094,7 +1096,7 @@ Assembler code        & Operation                       & f8l \\
 
 \subsubsection*{Rationale}
 
-Decrement is a common special case of subtraction, though not as common as increment as a secial case of addition.
+Decrement is a common special case of subtraction, though not as common as increment as a special case of addition.
 
 
 \subsection{incnw: 16-bit increment without carry update}
@@ -1130,7 +1132,7 @@ Assembler code         & Operation                            & f8l \\
 
 \subsubsection*{Rationale}
 
-Negation is a common special case of subtraction.
+Negation is a common special case of multiplication.
 
 
 \subsection{mul: multiplication}
@@ -1150,7 +1152,7 @@ Assembler code & Operation            & f8l \\
 
 \subsubsection*{Rationale}
 
-Multiplications are common, both explicitly and in array indexing. For efficient use of data memory, structs should not be padded, thus accessing arrays of structs often requires multiplications with factors that are not a power of two. This instruction allows to do these multiplications efficiently. The effect of the carry flag ismotivated by the use of this instruction together with \texttt{mad} for wider multiplications.
+Multiplications are common, both explicitly and in array indexing. For efficient use of data memory, structs should not be padded, thus accessing arrays of structs often requires multiplications with factors that are not a power of two. This instruction allows to do these multiplications efficiently. The effect of the carry flag is motivated by the use of this instruction together with \texttt{mad} for wider multiplications.
 
 
 \subsection{popw: 16-bit pop from stack}
@@ -1167,7 +1169,7 @@ none
 
 \subsubsection*{Rationale}
 
-This instruction is useful torestore16-bit registers that were saved temporarily via \texttt{pushw}. It is also a code-size efficient way of adjusting hte stack pointer by 2 (but does a memory read).
+This instruction is useful to restore 16-bit registers that were saved temporarily via \texttt{pushw}. It is also a code-size efficient way of adjusting the stack pointer by 2 (but does a memory read).
 
 
 \subsection{pushw: 16-bit push onto stack}
@@ -1183,7 +1185,7 @@ none
 
 \subsubsection*{Rationale}
 
-16-bit stack parameters can be passed easily via this instruction. This is common enough to make it worth having this instruction. Compared to using \texttt{ldw} followed by a \texttt{pushw} with a register operand, we save one byte of cde size, some execution time, and donot need a free 16-bit register (which might not be easily available at calls to functions that also have register parameters).
+16-bit stack parameters can be passed easily via this instruction. This is common enough to make it worth having this instruction. Compared to using \texttt{ldw} followed by a \texttt{pushw} with a register operand, we save one byte of code size, some execution time, and do not need a free 16-bit register (which might not be easily available at calls to functions that also have register parameters).
 
 
 \subsection{rlcw: 16-bit rotate left through carry}
@@ -1336,7 +1338,7 @@ none
 
 \subsubsection*{Rationale}
 
-This instruction can be used to implement while loops instead of using \texttt{dec} followed by \texttt{jr nz}. Not affecting flags make it suitable for implementing arbitrary-length arithmetic (\texttt{dec} would not preserve the carry flag, thus complicating its use). The choice of operands is motivated by the use-case of arbitrary-length multiplications via \texttt{mad}.
+This instruction can be used to implement while loops instead of using \texttt{dec} followed by \texttt{jr nz}. Not affecting flags makes it suitable for implementing arbitrary-length arithmetic (\texttt{dec} would not preserve the carry flag, thus complicating its use). The choice of operands is motivated by the use-case of arbitrary-length multiplications via \texttt{mad}.
 
 
 \subsection{jp: jump}
@@ -1390,7 +1392,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the carry flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the carry flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and using an unconditional jump.
 
 
 \subsection{jrgt: jump on greater}
@@ -1422,7 +1424,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the carry flag together with the z flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the carry flag together with the z flag are useful for implementing common unsigned comparisons, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and using an unconditional jump.
 
 
 \subsection{jrn: jump on negative}
@@ -1438,7 +1440,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the n flag are useful for implementing common unsigned comparisons with 0, some bit tests, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the n flag are useful for implementing common unsigned comparisons with 0, some bit tests, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and using an unconditional jump.
 
 
 \subsection{jrnc: jump on no carry}
@@ -1518,7 +1520,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the n flag are useful for implementing signed comparisons wide than the operands of the available compare and subtraction instructions, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the n flag are useful for implementing signed comparisons wider than the operands of the available compare and subtraction instructions, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and using an unconditional jump.
 
 
 \subsection{jrsge: jump on signed greater or equal}
@@ -1564,7 +1566,7 @@ Assembler code   & Operation                                  & f8l \\
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the z, n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the z, n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and using an unconditional jump.
 
 
 \subsection{jrslt: jump on signed less}
@@ -1580,7 +1582,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the n and o flags are useful for implementing signed comparisons, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and using an unconditional jump.
 
 
 \subsection{jrz: jump on zero}
@@ -1596,7 +1598,7 @@ none
 
 \subsubsection*{Rationale}
 
-Conditional jumps depending on the zero flag are useful for implementing common tests for 0, and control-flow depending thereon. Since most jump targest are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and additon a unconditional jump.
+Conditional jumps depending on the zero flag are useful for implementing common tests for 0, and control-flow depending thereon. Since most jump targets are nearby, it makes sense to only have the relative conditional jump, as further jumps can still be implemented by inverting the condition and using an unconditional jump.
 
 
 \subsection{ret: return}
@@ -1714,7 +1716,7 @@ The timer increments the 16-bit counter register. When incrementing from 0xffff,
 
 \section{GPIO}
 
-The GPIO has (up to 16 bit) data direction, output data, input data, pull-up registers.
+The GPIO has (up to 16-bit) data direction, output data, input data, pull-up registers.
 
 \end{document}
 
