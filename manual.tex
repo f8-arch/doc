@@ -38,15 +38,38 @@
 
 \section{Introduction}
 
-Little-endian. Stack grows downward. 16-bit flat address space.
+The f8 is an 8/16-bit architecture based on lessons learned from many years of working with existing 8/16-bit architectures, their strengths and weaknesses, in particular when targeted by a C compiler. It emphasizes efficient use of memory (for both the program and data), and is meant for use cases where the power of a 32-bit ARM or RISC-V is not needed. For the lower end, there is also the f8l variant, which has a smaller instruction set, and can be implemented with fewer gates / less silicon area.
 
-\texttt{pc} after reset: 0x4000. Other registers (including \texttt{sp}) after reset: unspecified. (P)ROM/Flash from 0x4000. RAM up to 0x3fff. I/O from 0x0000. Empty PROM/Flash is logically 0x00 (to trigger trap). All instructions execute atomically. Memory reads have no side-effects.
+At a high level, this means:
 
-Safety features: trap on opcode 0x00. Trap on write to address 0x0000.
+\begin{itemize}
+\item An efficient stackpointer-relative addressing mode for efficient handling of local variables
+\item A unified address space for efficient pointer access
+\item Having a few data / pointer registers for temporary storage
+\item Hardware multithreading and support for atomics to replace peripheral hardware
+\end{itemize}
+
+\section{Safety and Security}
+
+With a 16-bit logical address space, and the intended use, the f8 cannot afford to use virtual memory, which would be necessary for guard pages. Instead we use a simple mitigation for memory safety issues, that resets the f8 on three error conditions:
+
+\begin{itemize}
+\item Attempts to write via null pointers reset the f8 (via an I/O register at address 0x0000).
+\item Attempts to execute 0-initialized memory reset the f8 (via the \hyperref[inst:trap]{trap instruction} that has opcode 0x00).
+\item A simple  \hyperref[periph:watchdog]{watchdog} can reset the f8.
+\end{itemize}
+
+The f8 is little-endian. The stack grows downward. There is a 16-bit flat address space. Memory reads have no side-effects. All instructions execute atomically.
+
+\section{Memory Map}
+
+I/O is mapped starting from 0x0000 (as required by the safety / security feature regarding null pointer reads). RAM is mapped up to 0x3fff. (P)ROM/Flash from 0x4000. The idea is to allow for up to 48 KB of (P)ROM/Flash and up to 8 KB of RAM directly in the 16-bit address space.
 
 \section{Registers}
 
 There is an 8-bit flag register \texttt{f}, which contains the half-carry flag \texttt{h}, the carry flag \texttt{c}, the negative flag \texttt{n}, the zero flag \texttt{z}, the overflow / parity flag \texttt{o}, and three reserved bits. Unless otherwise noted, instructions leave the reserved flags in an undefined state. The reserved bits should not be written by the user except via the \texttt{xch f, (}n\texttt{, sp)} instruction.
+
+After reset, \texttt{pc} has the value 0x4000 the value of the other registers mentioned in this section after reset is unspecified.
 
 \vspace{3mm}
 \begin{bytefield}[bitwidth=0.050\linewidth]{8}
@@ -142,7 +165,7 @@ Prefix & semantics & group \\
 \texttt{op16\_1} & Any of \texttt{y}, \texttt{mm}, \texttt{(n, sp)}, \texttt{(nn, z)}. \\
 \end{tabular}
 
-\section{8-bit two-operand instructions}
+\section{8-bit 2-operand instructions}
 
 Instructions where the location is used for \texttt{altacc8} and \texttt{op8} are not valid.
 
@@ -1635,7 +1658,7 @@ none
 When returning from an interrupt handler, interrupts should be reenabled at the same time. This instruction is necessary to return and enable atomically. To ensure that all flags get restored to their state from before the interrupt handler, it may not affect any flags, not even reserved ones.
 
 
-\subsection{trap}
+\subsection{trap}\label{inst:trap}
 
 Opcode 0x00. Trap reset.
 
@@ -1668,13 +1691,13 @@ todo - see opcodemap.ods for now.
 
 Unless otherwise noted, the vlaue of I/O registers on reset is unspecified.
 
-\section{Watchdog and Reset}
+\section{Watchdog and Reset}\label{periph:watchdog}
 
 The watchdog has an 8-bit configuration register and a 16-bit counter register.
 
 When the watchdog is active, the system clock is divided by 16, and then used to increment the counter register.
 
-The system is reset when a power-on reset happens, the watchdog counter register reaches 0xffff, the trap instruction is executed, or the byte at memory address 0 is written.
+The system is reset when a power-on reset happens, the watchdog counter register reaches 0xffff, the \hyperref[inst:trap]{trap instruction} is executed, or the byte at memory address 0x0000 is written.
 
 \subsection*{Configuration Register}
 
