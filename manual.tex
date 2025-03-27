@@ -1330,6 +1330,8 @@ This instruction is useful to shuffle data around, and to implement 16-bit atomi
 
 \subsection{call}
 
+\texttt{call \#ii} ignores all flags, changes no flags, not even reserved ones.
+
 \begin{tabular}{l l l}
 Assembler code         & Operation                                  & f8l \\
 \texttt{call \#ii}     & \texttt{sp -= 2; (sp) = pc; pc = \#ii}     & Yes \\
@@ -1343,7 +1345,7 @@ none
 
 \subsubsection*{Rationale}
 
-Calling and returning from functions using a return address on the stack is common. This instruction helps implement it efficiently.
+Calling and returning from functions using a return address on the stack is common. This instruction helps implement it efficiently. Not affecting flags, not even reserved ones, makes \texttt{call \#ii} suitable for as a software interrupt.
 
 
 \subsection{dnjnz: decrement without carry update amd jump if not zero}
@@ -1381,7 +1383,7 @@ none
 
 \subsubsection*{Rationale}
 
-A jump instruction that can reach any target is very useful to implement control-flow. Not affecting flags, not even reserved ones, makes this instruction suitable for use at the interrupt vector.
+A jump instruction that can reach any target is very useful to implement control-flow. Not affecting flags, not even reserved ones, makes \texttt{jp \#ii} instruction suitable for use at the interrupt vector.
 
 
 \subsection{jr: jump}
