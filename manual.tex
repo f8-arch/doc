@@ -385,7 +385,7 @@ none
 
 \subsubsection*{Rationale}
 
-Initalizing or setting an object, or parts thereof, to 0 is common, so having a dedicated instruction is worth it vs. using \texttt{ld}.
+Initializing or setting an object, or parts thereof, to 0 is common, so having a dedicated instruction is worth it vs. using \texttt{ld}.
 
 
 \subsection{dec: 8-bit decrement}
@@ -815,7 +815,7 @@ Assembler code                 & Operation                   & f8l \\
 
 \subsubsection*{Rationale}
 
-When aiming for memory efficiency, it is important to be able to chose the smallest type that can hold the data without incurring a code size or performance penalty. This instruction help implement efficient up-casts of unsigned numbers. Its benefits are not as big as those of \texttt{sex} per individual upcast, but onthe other hand, unsigned numbers are used more commonly, thus unsigned upcasts are more common.
+When aiming for memory efficiency, it is important to be able to chose the smallest type that can hold the data without incurring a code size or performance penalty. This instruction help implement efficient up-casts of unsigned numbers. Its benefits are not as big as those of \texttt{sex} per individual upcast, but on the other hand, unsigned numbers are used more commonly, thus unsigned upcasts are more common.
 
 
 \section{Other 8-bit instructions}
@@ -836,7 +836,7 @@ Assembler code        & Operation                        & f8l \\
 
 \subsubsection*{Rationale}
 
-This instruction allows the efficient implentation of explicit casts of 8-bit numbers to bool and, together with the \texttt{xor} instruction, of the negation operator for 8-bit numbers.
+This instruction allows the efficient implementation of explicit casts of 8-bit numbers to bool and, together with the \texttt{xor} instruction, of the negation operator for 8-bit numbers.
 
 
 \subsection{cax: 8-bit compare and exchange}
@@ -1002,7 +1002,7 @@ Assembler code        & Operation                                         & f8l 
 
 \subsubsection*{Rationale}
 
-Getting the hardware thread number efficiently is useful for implementing thread-local storage. While \texttt{thrd} will not be a common instruction is typical programs, the alternative is doing a search for the current calue of \texttt{sp} in a list of stack pointer ranges, which would be quite inefficient.
+Getting the hardware thread number efficiently is useful for implementing thread-local storage. While \texttt{thrd} will not be a common instruction is typical programs, the alternative is doing a search for the current value of \texttt{sp} in a list of stack pointer ranges, which would be quite inefficient.
 
 
 \subsection{xch: 8-bit exchange}
@@ -1064,7 +1064,7 @@ Assembler code          & Operation                          & f8l \\
 
 \subsubsection*{Rationale}
 
-This instruction allows the efficient implentation of explicit casts of 16-bit numbers to bool and, together with the \texttt{xor} instruction, of the negation operator for 16-bit numbers.
+This instruction allows the efficient implementation of explicit casts of 16-bit numbers to bool and, together with the \texttt{xor} instruction, of the negation operator for 16-bit numbers.
 
 
 \subsection{caxw: 16-bit compare and exchange}
@@ -1175,7 +1175,7 @@ Assembler code & Operation            & f8l \\
 
 \subsubsection*{Rationale}
 
-Multiplications are common, both explicitly and in array indexing. For efficient use of data memory, structs should not be padded, thus accessing arrays of structs often requires multiplications with factors that are not a power of two. This instruction allows to do these multiplications efficiently. The effect of the carry flag is motivated by the use of this instruction together with \texttt{mad} for wider multiplications.
+Multiplications are common, both explicitly and in array indexing. For efficient use of data memory, structs should not be padded, thus accessing arrays of structs often requires multiplications with factors that are not a power of two. This instruction allows to do these multiplications efficiently. The effect on the carry flag is motivated by the use of this instruction together with \texttt{mad} for wider multiplications.
 
 
 \subsection{popw: 16-bit pop from stack}
@@ -1691,7 +1691,7 @@ todo - see opcodemap.ods for now.
 
 \chapter{Peripherals}
 
-Unless otherwise noted, the vlaue of I/O registers on reset is unspecified.
+Unless otherwise noted, the value of I/O registers on reset is unspecified.
 
 \section{Watchdog and Reset}\label{periph:watchdog}
 
