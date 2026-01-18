@@ -293,8 +293,8 @@ Todo: Document possible altacc prefixes.
 
 \begin{tabular}{l l l}
 Assembler code              & Operation                              & f8l \\
-\texttt{adcw xl, op16\_2}   & \texttt{y = y + op16\_2 + c}           & No \\
-\texttt{adcw op16\_2ni, xl} & \texttt{op16\_2ni = op16\_2ni + y + c} & No
+\texttt{adcw y, op16\_2}    & \texttt{y = y + op16\_2 + c}           & No \\
+\texttt{adcw op16\_2ni, y} & \texttt{op16\_2ni = op16\_2ni + y + c} & No
 \end{tabular}
 
 \subsubsection*{Affected Flags}
@@ -305,9 +305,9 @@ Assembler code              & Operation                              & f8l \\
 \subsection{addw: 16-bit addition}
 
 \begin{tabular}{l l l}
-Assembler code              & Operation                          & f8l \\
-\texttt{adcw xl, op16\_2}   & \texttt{y = y + op16\_2}           & No \\
-\texttt{adcw op16\_2ni, xl} & \texttt{op16\_2ni = op16\_2ni + y} & No
+Assembler code               & Operation                          & f8l \\
+\texttt{addw y, op16\_2}     & \texttt{y = y + op16\_2}           & No \\
+\texttt{addw op16\_2ni, y}   & \texttt{op16\_2ni = op16\_2ni + y} & No
 \end{tabular}
 
 \subsubsection*{Affected Flags}
@@ -321,8 +321,8 @@ todo: do we really want the effect on o here? If yes, why not on the 8-bit logic
 
 \begin{tabular}{l l l}
 Assembler code             & Operation                          & f8l \\
-\texttt{orw xl, op16\_2}   & \texttt{y = y | op16\_2}           & No \\
-\texttt{orw op16\_2ni, xl} & \texttt{op16\_2ni = op16\_2ni | y} & No
+\texttt{orw y, op16\_2}    & \texttt{y = y | op16\_2}           & No \\
+\texttt{orw op16\_2ni, y}  & \texttt{op16\_2ni = op16\_2ni | y} & No
 \end{tabular}
 
 \subsubsection*{Affected Flags}
@@ -333,9 +333,9 @@ Assembler code             & Operation                          & f8l \\
 \subsection{sbcw: 16-bit subtraction with carry}
 
 \begin{tabular}{l l l}
-Assembler code              & Operation                             & f8l \\
-\texttt{sbcw xl, op16\_2ni} & \texttt{y = y + \~{}op16\_2ni + c}       & No \\
-\texttt{sbcw op16\_2ni, xl} & \texttt{op16\_2 = \~{}op16\_2ni + y + c} & No
+Assembler code              & Operation                                & f8l \\
+\texttt{sbcw y, op16\_2ni}  & \texttt{y = y + \~{}op16\_2ni + c}       & No \\
+\texttt{sbcw op16\_2ni, y}  & \texttt{op16\_2 = \~{}op16\_2ni + y + c} & No
 \end{tabular}
 
 \subsubsection*{Affected Flags}
@@ -346,9 +346,9 @@ Assembler code              & Operation                             & f8l \\
 \subsection{subw: 16-bit subtraction}
 
 \begin{tabular}{l l l}
-Assembler code              & Operation                             & f8l \\
-\texttt{subw xl, op16\_2ni} & \texttt{y = y + \~{}op16\_2ni + 1}       & No \\
-\texttt{subw op16\_2ni, xl} & \texttt{op16\_2 = \~{}op16\_2ni + y + 1} & No
+Assembler code              & Operation                                & f8l \\
+\texttt{subw y, op16\_2ni}  & \texttt{y = y + \~{}op16\_2ni + 1}       & No \\
+\texttt{subw op16\_2ni, y}  & \texttt{op16\_2 = \~{}op16\_2ni + y + 1} & No
 \end{tabular}
 
 \subsubsection*{Affected Flags}
@@ -362,8 +362,8 @@ todo: do we really want the effect on o here? If yes, why not on the 8-bit logic
 
 \begin{tabular}{l l l}
 Assembler code              & Operation                             & f8l \\
-\texttt{xorw xl, op16\_2}   & \texttt{y = y \^{} op16\_2}           & No \\
-\texttt{xorw op16\_2ni, xl} & \texttt{op16\_ni2 = op16\_2ni \^{} y} & No
+\texttt{xorw y, op16\_2}    & \texttt{y = y \^{} op16\_2}           & No \\
+\texttt{xorw op16\_2ni, y}  & \texttt{op16\_ni2 = op16\_2ni \^{} y} & No
 \end{tabular}
 
 \subsubsection*{Affected Flags}
