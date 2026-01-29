@@ -169,7 +169,7 @@ Prefix & semantics & group \\
 
 \section{8-bit 2-operand instructions}
 
-Instructions where the location is used for \texttt{altacc8} and \texttt{op8} are not valid.
+Instructions where the same location is used for \texttt{altacc8} and \texttt{op8\_2} operand are not valid.
 
 \subsection{adc: 8-bit addition with carry}
 
@@ -1693,40 +1693,41 @@ todo - see opcodemap.ods for now. This is still preliminary, and subject to ongo
 
 \begin{center}
 \begin{adjustbox}{width=\textwidth}
+
 \begin{tabular}{l||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
  &x0 & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9 & xa & xb & xc & xd & xe & xf \\
 \hline\hline
-0x & trap & sub xl, mm & sub xl (n, sp) & sub xl (nn, z) & sub xl, zl & sub xl, xh & sub xl, yl & sub xl, yh &  & sbc xl, mm & sbc xl (n, sp) & sbc xl (nn, z) & sbc xl, zl & sbc xl, xh & sbc xl, yl & sbc xl, yh \\
+0x & trap & sub xl, mm & sub xl (n, sp) & sub xl (nn, z) & sub xl, xh & sub xl, zl & sub xl, yl & sub xl, yh & sbc xl, mm &  & sbc xl (n, sp) & sbc xl (nn, z) & sbc xl, xh & sbc xl, zl & sbc xl, yl & sbc xl, yh \\
 \hline
-1x & add xl, \#i & add xl, mm & add xl (n, sp) & add xl (nn, z) & add xl, zl & add xl, xh & add xl, yl & add xl, yh & adc xl, \#i & adc xl, mm & adc xl (n, sp) & adc xl (nn, z) & adc xl, zl & adc xl, xh & adc xl, yl & adc xl, yh \\
+1x & add xl, mm & add xl, \#i & add xl (n, sp) & add xl (nn, z) & add xl, xh & add xl, yl & add xl, zl & add xl, yh & adc xl, mm & adc xl, \#i & adc xl (n, sp) & adc xl (nn, z) & adc xl, xh & adc xl, zl & adc xl, yl & adc xl, yh \\
 \hline
-2x & cp xl, \#i & cp xl, mm & cp xl (n, sp) & cp xl (nn, z) & cp xl, zl & cp xl, xh & cp xl, yl & cp xl, yh & or xl, \#i & or xl, mm & or xl (n, sp) & or xl (nn, z) & or xl, zl & or xl, xh & or xl, yl & or xl, yh \\
+2x & cp xl, mm & cp xl, \#i & cp xl (n, sp) & cp xl (nn, z) & cp xl, xh & cp xl, zl & cp xl, yl & cp xl, yh & or xl, mm & or xl, \#i & or xl (n, sp) & or xl (nn, z) & or xl, xh & or xl, zl & or xl, yl & or xl, yh \\
 \hline
-3x & and xl, \#i & and xl, mm & and xl (n, sp) & and xl (nn, z) & and xl, zl & and xl, xh & and xl, yl & and xl, yh & xor xl, \#i & xor xl, mm & xor xl (n, sp) & xor xl (nn, z) & xor xl, zl & xor xl, xh & xor xl, yl & xor xl, yh \\
+3x & subw y, mm & ldw y, sp & subw y, (n, sp) & subw y, x & sbcw y, mm & ldw ((n,sp)), y & sbcw y, (n, sp) & sbcw y, x & addw y, mm & inc (n, sp) & addw y, (n, sp) & addw y, x & adcw y, mm & adcw y, \#ii & adcw y, (n, sp) & adcw y, x \\
 \hline
-4x & srl mm & srl (n, sp) & srl xl & srl (n, y) & sll mm & sll (n, sp) & sll xl & sll (n, y) & rrc mm & rrc (n, sp) & rrc xl & rrc (n, y) & rlc mm & rlc (n, sp) & rlc xl & rlc (n, y) \\
+4x & sllw y &  & rrcw y & altacc3 & sllw y, xl & sraw y & rrcw (n, sp) & rlcw (n, sp) & jrno \#d & altacc5 & jrsge \#d & jrslt \#d & jrsle \#d &  & ldw x, (y) & jrle \#d \\
 \hline
-5x & inc mm & inc (n, sp) & inc xl & inc (n, y) & dec mm & dec (n, sp) & dec xl & dec (n, y) & crl mm & crl (n, sp) & crl xl & crl (n, y) & tst mm & tst (n, sp) & tst xl & tst (n, y) \\
+5x & addw y, \#ii & inc mm & inc xl & inc (n, y) & dec (n, sp) & dec mm & dec xl & dec (n, y) & rrc (n, sp) & rrc mm & rrc xl & rrc (n, y) & rlc (n, sp) & rlc mm & rlc xl & rlc (n, y) \\
 \hline
-6x & push mm & push (n, sp) & push xl & push (n, y) & jp \#ii & jp y & call \#ii & call y &  &  &  &  &  &  &  &  \\
+6x & push (n, sp) & push mm & push xl & push (n, y) & jp y & jp \#ii & call \#ii & call y &  & srlw y &  &  &  &  & ldw y, z &  \\
 \hline
-7x & ldw y, sp & subw y, mm & subw y, (n, sp) & subw y, x & ldw ((n,sp)), y & sbcw y, mm & sbcw y, (n, sp) & sbcw y, x & addw y, \#ii & addw y, mm & addw y, (n, sp) & addw y, x & adcw y, \#ii & adcw y, mm & adcw y, (n, sp) & adcw y, x \\
+7x & and xl, mm & xor xl, \#i & and xl (n, sp) & and xl (nn, z) & xor xl, xh & and xl, zl & and xl, yl & and xl, yh & xor xl, mm & and xl, \#i & xor xl (n, sp) & xor xl (nn, z) & and xl, xh & xor xl, zl & xor xl, yl & xor xl, yh \\
 \hline
-8x & ld xl, \#i & ld xl, mm & ld xl, (n, sp) & ld xl, (nn, z) & ld xl, (y) & ld xl, (n, y) & ld xl, xh & ld xl, yl & ld xl, yh & ld xl, zl & ld xl, zh & ld mm, xl & ld (n, sp), xl & ld (nn, z), xl & ld (y), xl & ld (n, y), xl \\
+8x & pushw (n, sp) & pushw mm & pushw (nn, z) & pushw y & tstw (n, sp) & tstw mm & tstw (nn, z) & tstw y & ldw (n, y), x & pushw \#ii & addw sp, \#d & addw y, \#d & ldi (n, y), (z) & ldwi (n, y), (z) & sex y, xl & zex y, xl \\
 \hline
-9x & push \#i & xch xl, (n, sp) & xch xl, (y) & xch yl, yh & altacc4 & rot xl, \#i & sra xl & da xl & bool xl & pop xl & thrd xl & cax (y), zl, xl & swapop & altacc1 & altacc2 & altacc3 \\
+9x & cpw y, \#ii & jr \#d & jrc \#d & jrnz \#d & jrnc \#d & jrz \#d & jrn \#d & jrnn \#d & mul y & msk (y), xl, \#i & ret & reti & negw y & mad x, mm, yl & mad x, (nn, z), yl & mad x, (z), yl \\
 \hline
-ax & clrw mm & clrw (n, sp) & clrw (nn, z) & clrw y & incw mm & incw (n, sp) & incw (nn, z) & incw y & adcw mm & adcw (n, sp) & adcw (nn, z) & adcw y & sbcw mm & sbcw (n, sp) & sbcw (nn, z) & sbcw y \\
+ax & xch xl, (n, sp) & push \#i & xch xl, (y) & xch yl, yh & incw (n, sp) & incw mm & sbcw (nn, z) & incw y & adcw (n, sp) & adcw mm & adcw (nn, z) & adcw y & sbcw (n, sp) & sbcw mm & incw (nn, z) & sbcw y \\
 \hline
-bx & pushw mm & pushw (n, sp) & pushw (nn, z) & pushw y & tstw mm & tstw (n, sp) & tstw (nn, z) & tstw y & msk (y), xl, \#i & mul y & ret & reti & mad x, mm, yl & mad x, (n, sp), yl & mad x, (nn, z), yl & mad x, (z), yl \\
+bx & ldw y, mm & ldw y, \#ii & ldw y, (n, sp) & ldw y, (nn, z) & ldw y, (y) & ldw y, (n, y) & ldw y, x & ldw y, \#d & ldw (n, sp), y & swapop & ldw (nn, z), y & ldw x, y & ldw (y), x & ldw z, y & popw y & xch f, (n, sp) \\
 \hline
-cx & ldw y, \#ii & ldw y, mm & ldw y, (n, sp) & ldw y, (nn, z) & ldw y, (n, y) & ldw y, (y) & ldw y, x & ldw y, \#d & ldw mm, y & ldw (n, sp), y & ldw (nn, z), y & ldw x, y & ldw z, y & ldw (y), x & ldw (n, y), x & ldwi (n, y), (z) \\
+cx & ld xl, mm & bool xl & ld xl, (n, sp) & ld xl, (nn, z) & ld xl, (n, y) & ld xl, (y) & ld xl, xh & ld xl, yl & ld xl, zl & ld xl, yh & ld xl, zh & ld mm, xl & ld (nn, z), xl & ld (n, sp), xl & ld (y), xl & ld (n, y), xl \\
 \hline
-dx & jr \#d & dnjnz yh, \#d & jrz \#d & jrnz \#d & jrc \#d & jrnc \#d & jrn \#d & jrnn \#d & altacc5 & jrno \#d & jrsge \#d & jrslt \#d & ldw y, z & jrsle \#d & ldw x, (y) & jrle \#d \\
+dx & clrw (n, sp) & clrw mm & clrw (nn, z) & clrw y & rot xl, \#i & altacc4 & sra xl & da xl & caxw (y), z, x & thrd xl & mad x, (n, sp), yl & boolw y & xorw y, mm & xorw y, \#ii & xorw y, (n, sp) & xorw y, x \\
 \hline
-ex & srlw y & sllw y & rrcw y & rlcw y & sraw y & sllw y, xl & rrcw (n, sp) & rlcw (n, sp) & pushw \#ii & popw y & addw sp, \#d & addw y, \#d & xch f, (n, sp) & ldi (n, y), (z) & sex y, xl & zex y, xl \\
+ex & orw y, mm & orw y, \#ii & orw y, (n, sp) & orw y, x & xchw y, (n, sp) & xchw x, (y) & incnw y & decw (n, sp) & pop xl & ld xl, \#i & dnjnz yh, \#d & cax (y), zl, xl & altacc1 & ldw mm, y & altacc2 & rlcw y \\
 \hline
-fx & orw y, \#ii & orw y, mm & orw y, (n, sp) & orw y, x & xchw x, (y) & xchw y, (n, sp) & incnw y & decw (n, sp) & cpw y, \#ii & caxw (y), z, x & negw y & boolw y & xorw y, \#ii & xorw y, mm & xorw y, (n, sp) & xorw y, x 
+fx & srl (n, sp) & srl mm & srl xl & srl (n, y) & sll (n, sp) & sll mm & sll xl & sll (n, y) & crl (n, sp) & crl mm & crl xl & crl (n, y) & tst (n, sp) & tst mm & tst xl & tst (n, y)
 \end{tabular}
 \end{adjustbox}
 \end{center}
