@@ -69,14 +69,14 @@ I/O is mapped starting from 0x0000 (as required by the safety / security feature
 
 \section{Registers}
 
-There is an 8-bit flag register \texttt{f}, which contains the half-carry flag \texttt{h}, the carry flag \texttt{c}, the negative flag \texttt{n}, the zero flag \texttt{z}, the overflow / parity flag \texttt{o}, and three reserved bits. Unless otherwise noted, instructions leave the reserved flags in an undefined state. The reserved bits should not be written by the user except via the \texttt{xch f, (}n\texttt{, sp)} instruction.
+There is an 8-bit flag register \texttt{f}, which contains the the overflow / parity flag \texttt{o}, the negative flag \texttt{n}, the zero flag \texttt{z}, the carry flag \texttt{c}, half-carry flag \texttt{h}, and three reserved bits. Unless otherwise noted, instructions leave the reserved flags in an undefined state. The reserved bits should not be written by the user except via the \texttt{xch f, (}n\texttt{, sp)} instruction.
 
 After reset, \texttt{pc} has the value 0x4000 the value of the other registers mentioned in this section after reset is unspecified.
 
 \vspace{3mm}
 \begin{bytefield}[bitwidth=0.050\linewidth]{8}
 	\bitheader{0,7} \\
-	\bitbox{1}{\texttt{h}} & \bitbox{1}{\texttt{c}} & \bitbox{1}{\texttt{n}} & \bitbox{1}{\texttt{z}} & \bitbox{1}{\texttt{o}} & \bitbox{3}{reserved}
+	\bitbox{1}{\texttt{o}} & \bitbox{1}{\texttt{n}} & \bitbox{1}{\texttt{z}} & \bitbox{1}{\texttt{c}} & \bitbox{1}{\texttt{h}} & \bitbox{3}{reserved}
 \end{bytefield}
 
 \vspace{3mm}
@@ -182,7 +182,7 @@ Assembler code               & Operation                               & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{hcnzo}
+\texttt{onzch}
 
 
 \subsection{add: 8-bit addition}
@@ -196,7 +196,7 @@ Assembler code               & Operation                           & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{hcnzo}
+\texttt{onzch}
 
 
 \subsection{and: 8-bit bitwise and}
@@ -226,7 +226,7 @@ Assembler code              & Operation                         & f8l\\
 
 \subsubsection*{Affected Flags}
 
-\texttt{hcnzo}
+\texttt{onzch}
 
 
 \subsection{or: 8-bit bitwise or}
@@ -254,7 +254,7 @@ Assembler code                 & Operation                                     &
 
 \subsubsection*{Affected Flags}
 
-\texttt{hcnzo}
+\texttt{onzch}
 
 
 \subsection{sub: 8-bit subtraction}
@@ -268,7 +268,7 @@ Assembler code                 & Operation                                     &
 
 \subsubsection*{Affected Flags}
 
-\texttt{hcnzo}
+\texttt{onzch}
 
 
 \subsection{xor: 8-bit bitwise exclusive or}
@@ -299,7 +299,7 @@ Assembler code              & Operation                              & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 
 \subsection{addw: 16-bit addition}
@@ -312,12 +312,10 @@ Assembler code               & Operation                          & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 
 \subsection{orw: 16-bit bitwise or}
-
-todo: do we really want the effect on o here? If yes, why not on the 8-bit logic ops?
 
 \begin{tabular}{l l l}
 Assembler code             & Operation                          & f8l \\
@@ -327,7 +325,7 @@ Assembler code             & Operation                          & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{nzo}
+\texttt{nz}
 
 
 \subsection{sbcw: 16-bit subtraction with carry}
@@ -340,7 +338,7 @@ Assembler code              & Operation                                & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 
 \subsection{subw: 16-bit subtraction}
@@ -353,12 +351,10 @@ Assembler code              & Operation                                & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 
 \subsection{xorw: 16-bit bitwise exclusive or}
-
-todo: do we really want the effect on o here? If yes, why not on the 8-bit logic ops?
 
 \begin{tabular}{l l l}
 Assembler code              & Operation                             & f8l \\
@@ -368,7 +364,7 @@ Assembler code              & Operation                             & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{nzo}
+\texttt{nz}
 
 
 \section{8-bit 1-operand-instructions}
@@ -400,7 +396,7 @@ Assembler code       & Operation                       & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{hcnzo}
+\texttt{onzch}
 
 
 \subsection{inc: 8-bit increment}
@@ -443,7 +439,7 @@ Assembler code       & Operation                                                
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 
 \subsection{srl: 8-bit shift right logical}
@@ -456,7 +452,7 @@ Assembler code       & Operation                                                
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 
 \subsection{rlc: 8-bit rotate left through carry}
@@ -469,7 +465,7 @@ Assembler code       & Operation                                                
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 
 \subsection{rrc: 8-bit rotate right through carry}
@@ -482,7 +478,7 @@ Assembler code       & Operation                                                
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 
 \subsection{tst: 8-bit test}
@@ -497,7 +493,7 @@ Assembler code       & Operation        & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -516,7 +512,7 @@ Assembler code         & Operation                        & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -550,7 +546,7 @@ Assembler code         & Operation                        & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -584,7 +580,7 @@ Assembler code         & Operation                                 & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -603,7 +599,7 @@ Assembler code         & Operation         & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -880,7 +876,7 @@ While the binary-coded-decimal (BCD) representation of numbers is mostly obsolet
 
 \subsubsection*{Affected Flags}
 
-\texttt{hcnzo}
+\texttt{onzch}
 
 
 \subsection{mad: multiply and add}
@@ -982,7 +978,7 @@ Assembler code       & Operation                                                
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 \subsubsection*{Rationale}
 
@@ -1045,7 +1041,7 @@ Assembler code              & Operation                          & f8l \\
 
 \subsubsection*{Affected Flags}
 
-none (\texttt{addw sp, \#d}) or \texttt{cnzo} (all others).
+none (\texttt{addw sp, \#d}) or \texttt{onzc} (all others).
 
 \subsubsection*{Rationale}
 
@@ -1101,7 +1097,7 @@ Assembler code              & Operation                        & f8l\\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -1117,7 +1113,7 @@ Assembler code        & Operation                       & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -1153,7 +1149,7 @@ Assembler code         & Operation                            & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnzo}
+\texttt{onzc}
 
 \subsubsection*{Rationale}
 
@@ -1173,7 +1169,7 @@ Assembler code & Operation            & f8l \\
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 \subsubsection*{Rationale}
 
@@ -1224,7 +1220,7 @@ Assembler code         & Operation                                              
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 \subsubsection*{Rationale}
 
@@ -1242,7 +1238,7 @@ Assembler code         & Operation                                              
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 \subsubsection*{Rationale}
 
@@ -1261,7 +1257,7 @@ Assembler code                  & Operation                                     
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz} (\texttt{sllw y} and \texttt{sllw altacc16}) or \texttt{nz} (others).
+\texttt{nzc} (\texttt{sllw y} and \texttt{sllw altacc16}) or \texttt{nz} (others).
 
 \subsubsection*{Rationale}
 
@@ -1278,7 +1274,7 @@ Assembler code         & Operation                                              
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 \subsubsection*{Rationale}
 
@@ -1295,7 +1291,7 @@ Assembler code         & Operation                                          & f8
 
 \subsubsection*{Affected Flags}
 
-\texttt{cnz}
+\texttt{nzc}
 
 \subsubsection*{Rationale}
 
