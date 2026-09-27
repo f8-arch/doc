@@ -25,6 +25,8 @@
 \usepackage[english]{isodate}
 \usepackage{tabularx}
 \usepackage{adjustbox}
+\usepackage{rotating}
+\usepackage[x11names,table]{xcolor}
 \renewcommand{\cellalign}{tl}
 
 \isodate
@@ -1685,47 +1687,49 @@ An atomic bit-swap instruction \texttt{xchb} would not be used often enough to j
 
 \chapter{Opcode Map}
 
-todo - see opcodemap.ods for now. This table here is still preliminary, and only shows the main page.
-
-\begin{center}
-\begin{adjustbox}{width=\textwidth}
+\begin{sidewaystable}
+\centering
+\begin{adjustbox}{width=1.2\textwidth}
+% Needs \usepackage[x11names,table]{xcolor}
+% Needs \usepackage[x11names,table]{xcolor}
 \begin{tabular}{l||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c}
  &x0 & x1 & x2 & x3 & x4 & x5 & x6 & x7 & x8 & x9 & xa & xb & xc & xd & xe & xf \\
 \hline\hline
-0x & trap & sub xl, mm & sub xl, (n, sp) & sub xl, (nn, z) & sub xl, xh & sub xl, zl & sub xl, yl & sub xl, yh & sbc xl, mm &  & sbc xl, (n, sp) & sbc xl, (nn, z) & sbc xl, xh & sbc xl, zl & sbc xl, yl & sbc xl, yh \\
+0x & \cellcolor{DarkSeaGreen1} trap & \cellcolor{LemonChiffon1} sub xl, mm & \cellcolor{LemonChiffon1} sub xl, (n, sp) & \cellcolor{LemonChiffon1} sub xl, (nn, z) & \cellcolor{LemonChiffon1} sub xl, xh & \cellcolor{LemonChiffon1} sub xl, zl & \cellcolor{LemonChiffon1} sub xl, yl & \cellcolor{LemonChiffon1} sub xl, yh & \cellcolor{LemonChiffon1} sbc xl, mm & \cellcolor{white}  & \cellcolor{LemonChiffon1} sbc xl, (n, sp) & \cellcolor{LemonChiffon1} sbc xl, (nn, z) & \cellcolor{LemonChiffon1} sbc xl, xh & \cellcolor{LemonChiffon1} sbc xl, zl & \cellcolor{LemonChiffon1} sbc xl, yl & \cellcolor{LemonChiffon1} sbc xl, yh \\
 \hline
-1x & add xl, mm & add xl, \#i & add xl, (n, sp) & add xl, (nn, z) & add xl, xh & add xl, yl & add xl, zl & add xl, yh & adc xl, mm & adc xl, \#i & adc xl, (n, sp) & adc xl, (nn, z) & adc xl, xh & adc xl, zl & and xl, yl & adc xl, yh \\
+1x & \cellcolor{DarkSeaGreen1} add xl, mm & \cellcolor{DarkSeaGreen1} add xl, \#i & \cellcolor{DarkSeaGreen1} add xl, (n, sp) & \cellcolor{DarkSeaGreen1} add xl, (nn, z) & \cellcolor{DarkSeaGreen1} add xl, xh & \cellcolor{DarkSeaGreen1} add xl, yl & \cellcolor{DarkSeaGreen1} add xl, zl & \cellcolor{DarkSeaGreen1} add xl, yh & \cellcolor{DarkSeaGreen1} adc xl, mm & \cellcolor{DarkSeaGreen1} adc xl, \#i & \cellcolor{DarkSeaGreen1} adc xl, (n, sp) & \cellcolor{DarkSeaGreen1} adc xl, (nn, z) & \cellcolor{DarkSeaGreen1} adc xl, xh & \cellcolor{DarkSeaGreen1} adc xl, zl & \cellcolor{DarkSeaGreen1} and xl, yl & \cellcolor{DarkSeaGreen1} adc xl, yh \\
 \hline
-2x & cp xl, mm & cp xl, \#i & cp xl, (n, sp) & cp xl, (nn, z) & cp xl, xh & cp xl, zl & cp xl, yl & cp xl, yh & or xl, mm & or xl, \#i & or xl, (n, sp) & or xl, (nn, z) & or xl, xh & or xl, zl & or xl, yl & or xl, yh \\
+2x & \cellcolor{LemonChiffon1} cp xl, mm & \cellcolor{LemonChiffon1} cp xl, \#i & \cellcolor{LemonChiffon1} cp xl, (n, sp) & \cellcolor{LemonChiffon1} cp xl, (nn, z) & \cellcolor{LemonChiffon1} cp xl, xh & \cellcolor{LemonChiffon1} cp xl, zl & \cellcolor{LemonChiffon1} cp xl, yl & \cellcolor{LemonChiffon1} cp xl, yh & \cellcolor{DarkSeaGreen1} or xl, mm & \cellcolor{DarkSeaGreen1} or xl, \#i & \cellcolor{DarkSeaGreen1} or xl, (n, sp) & \cellcolor{DarkSeaGreen1} or xl, (nn, z) & \cellcolor{DarkSeaGreen1} or xl, xh & \cellcolor{DarkSeaGreen1} or xl, zl & \cellcolor{DarkSeaGreen1} or xl, yl & \cellcolor{DarkSeaGreen1} or xl, yh \\
 \hline
-3x & subw y, mm & ldw y, sp & subw y, (n, sp) & subw y, x & sbcw y, mm & ldw ((n,sp)), y & sbcw y, (n, sp) & sbcw y, x & addw y, mm & inc (n, sp) & addw y, (n, sp) & addw y, x & adcw y, mm & adcw y, \#ii & adcw y, (n, sp) & adcw y, x \\
+3x & \cellcolor{Bisque1} subw y, mm & \cellcolor{DarkSeaGreen1} ldw y, sp & \cellcolor{Bisque1} subw y, (n, sp) & \cellcolor{Bisque1} subw y, x & \cellcolor{Bisque1} sbcw y, mm & \cellcolor{Bisque1} ldw ((n,sp)), y & \cellcolor{Bisque1} sbcw y, (n, sp) & \cellcolor{Bisque1} sbcw y, x & \cellcolor{Bisque1} addw y, mm & \cellcolor{DarkSeaGreen1} inc (n, sp) & \cellcolor{Bisque1} addw y, (n, sp) & \cellcolor{Bisque1} addw y, x & \cellcolor{Bisque1} adcw y, mm & \cellcolor{Bisque1} adcw y, \#ii & \cellcolor{Bisque1} adcw y, (n, sp) & \cellcolor{Bisque1} adcw y, x \\
 \hline
-4x & sllw y & jrle \#d & rrcw y & altacc3 & sllw y, xl & sraw y & incnw y & decw (n, sp) & jrno \#d & altacc5 & jrsle \#d &  & jp y & jp \#ii & call \#ii & call y \\
+4x & \cellcolor{Bisque1} sllw y & \cellcolor{DarkSeaGreen1} jrle \#d & \cellcolor{Bisque1} rrcw y & \cellcolor{DarkSeaGreen1} altacc3 & \cellcolor{Bisque1} sllw y, xl & \cellcolor{Bisque1} sraw y & \cellcolor{Bisque1} incnw y & \cellcolor{Bisque1} decw (n, sp) & \cellcolor{DarkSeaGreen1} jrno \#d & \cellcolor{DarkSeaGreen1} altacc5 & \cellcolor{DarkSeaGreen1} jrsle \#d & \cellcolor{white}  & \cellcolor{DarkSeaGreen1} jp y & \cellcolor{DarkSeaGreen1} jp \#ii & \cellcolor{DarkSeaGreen1} call \#ii & \cellcolor{DarkSeaGreen1} call y \\
 \hline
-5x & addw y, \#ii & inc mm & inc xl & inc (n, y) & dec (n, sp) & dec mm & dec xl & dec (n, y) & rrc (n, sp) & rrc mm & rrc xl & rrc (n, y) & rlc (n, sp) & rlc mm & rlc xl & rlc (n, y) \\
+5x & \cellcolor{Bisque1} addw y, \#ii & \cellcolor{DarkSeaGreen1} inc mm & \cellcolor{DarkSeaGreen1} inc xl & \cellcolor{Bisque1} inc (n, y) & \cellcolor{DarkSeaGreen1} dec (n, sp) & \cellcolor{DarkSeaGreen1} dec mm & \cellcolor{DarkSeaGreen1} dec xl & \cellcolor{Bisque1} dec (n, y) & \cellcolor{DarkSeaGreen1} rrc (n, sp) & \cellcolor{DarkSeaGreen1} rrc mm & \cellcolor{DarkSeaGreen1} rrc xl & \cellcolor{Bisque1} rrc (n, y) & \cellcolor{DarkSeaGreen1} rlc (n, sp) & \cellcolor{DarkSeaGreen1} rlc mm & \cellcolor{DarkSeaGreen1} rlc xl & \cellcolor{Bisque1} rlc (n, y) \\
 \hline
-6x & push (n, sp) & push mm & push xl & push (n, y) & jrnc \#d & jrc \#d & ldw x, (y) &  & thrd xl & srlw y &  &  &  & pop xl & ldw y, z &  \\
+6x & \cellcolor{DarkSeaGreen1} push (n, sp) & \cellcolor{DarkSeaGreen1} push mm & \cellcolor{DarkSeaGreen1} push xl & \cellcolor{Bisque1} push (n, y) & \cellcolor{DarkSeaGreen1} jrnc \#d & \cellcolor{DarkSeaGreen1} jrc \#d & \cellcolor{Bisque1} ldw x, (y) & \cellcolor{white}  & \cellcolor{DarkSeaGreen1} thrd xl & \cellcolor{Bisque1} srlw y & \cellcolor{white}  & \cellcolor{white}  & \cellcolor{white}  & \cellcolor{DarkSeaGreen1} pop xl & \cellcolor{DarkSeaGreen1} ldw y, z & \cellcolor{white}  \\
 \hline
-7x & and xl, mm & xor xl, \#i & and xl, (n, sp) & and xl, (nn, z) & xor xl, xh & and xl, zl & adc xl, yl & and xl, yh & xor xl, mm & and xl, \#i & xor xl, (n, sp) & xor xl, (nn, z) & and xl, xh & xor xl, zl & xor xl, yl & xor xl, yh \\
+7x & \cellcolor{DarkSeaGreen1} and xl, mm & \cellcolor{DarkSeaGreen1} xor xl, \#i & \cellcolor{DarkSeaGreen1} and xl, (n, sp) & \cellcolor{DarkSeaGreen1} and xl, (nn, z) & \cellcolor{DarkSeaGreen1} xor xl, xh & \cellcolor{DarkSeaGreen1} and xl, zl & \cellcolor{DarkSeaGreen1} adc xl, yl & \cellcolor{DarkSeaGreen1} and xl, yh & \cellcolor{DarkSeaGreen1} xor xl, mm & \cellcolor{DarkSeaGreen1} and xl, \#i & \cellcolor{DarkSeaGreen1} xor xl, (n, sp) & \cellcolor{DarkSeaGreen1} xor xl, (nn, z) & \cellcolor{DarkSeaGreen1} and xl, xh & \cellcolor{DarkSeaGreen1} xor xl, zl & \cellcolor{DarkSeaGreen1} xor xl, yl & \cellcolor{DarkSeaGreen1} xor xl, yh \\
 \hline
-8x & pushw (n, sp) & pushw mm & pushw (nn, z) & pushw y & ldw (y), x & ldw z, y & tstw (nn, z) & tstw y & ldw (n, y), x & pushw \#ii & addw sp, \#d & addw y, \#d & ldi (n, y), (z) & ldwi (n, y), (z) & sex y, xl & zex y, xl \\
+8x & \cellcolor{DarkSeaGreen1} pushw (n, sp) & \cellcolor{DarkSeaGreen1} pushw mm & \cellcolor{DarkSeaGreen1} pushw (nn, z) & \cellcolor{DarkSeaGreen1} pushw y & \cellcolor{DarkSeaGreen1} ldw (y), x & \cellcolor{DarkSeaGreen1} ldw z, y & \cellcolor{DarkSeaGreen1} tstw (nn, z) & \cellcolor{DarkSeaGreen1} tstw y & \cellcolor{Bisque1} ldw (n, y), x & \cellcolor{DarkSeaGreen1} pushw \#ii & \cellcolor{DarkSeaGreen1} addw sp, \#d & \cellcolor{DarkSeaGreen1} addw y, \#d & \cellcolor{Bisque1} ldi (n, y), (z) & \cellcolor{Bisque1} ldwi (n, y), (z) & \cellcolor{Bisque1} sex y, xl & \cellcolor{Bisque1} zex y, xl \\
 \hline
-9x & tstw (n, sp) & tstw mm & jrslt \#d & jrnz \#d & jrsge \#d & jrz \#d & jrn \#d & jrnn \#d & mul y & msk (y), xl, \#i & ret & reti & negw y & mad x, mm, yl & mad x, (nn, z), yl & mad x, (z), yl \\
+9x & \cellcolor{DarkSeaGreen1} tstw (n, sp) & \cellcolor{DarkSeaGreen1} tstw mm & \cellcolor{DarkSeaGreen1} jrslt \#d & \cellcolor{DarkSeaGreen1} jrnz \#d & \cellcolor{DarkSeaGreen1} jrsge \#d & \cellcolor{DarkSeaGreen1} jrz \#d & \cellcolor{DarkSeaGreen1} jrn \#d & \cellcolor{DarkSeaGreen1} jrnn \#d & \cellcolor{Bisque1} mul y & \cellcolor{DarkSeaGreen1} msk (y), xl, \#i & \cellcolor{DarkSeaGreen1} ret & \cellcolor{DarkSeaGreen1} reti & \cellcolor{Bisque1} negw y & \cellcolor{Bisque1} mad x, mm, yl & \cellcolor{Bisque1} mad x, (nn, z), yl & \cellcolor{Bisque1} mad x, (z), yl \\
 \hline
-ax & xch xl, (n, sp) & xorw y, mm & xch xl, (y) & xch yl, yh & incw (n, sp) & incw mm & sbcw (nn, z) & incw y & adcw (n, sp) & adcw mm & adcw (nn, z) & adcw y & sbcw (n, sp) & sbcw mm & incw (nn, z) & sbcw y \\
+ax & \cellcolor{Bisque1} xch xl, (n, sp) & \cellcolor{Bisque1} xorw y, mm & \cellcolor{DarkSeaGreen1} xch xl, (y) & \cellcolor{Bisque1} xch yl, yh & \cellcolor{DarkSeaGreen1} incw (n, sp) & \cellcolor{DarkSeaGreen1} incw mm & \cellcolor{Bisque1} sbcw (nn, z) & \cellcolor{DarkSeaGreen1} incw y & \cellcolor{Bisque1} adcw (n, sp) & \cellcolor{Bisque1} adcw mm & \cellcolor{Bisque1} adcw (nn, z) & \cellcolor{Bisque1} adcw y & \cellcolor{Bisque1} sbcw (n, sp) & \cellcolor{Bisque1} sbcw mm & \cellcolor{DarkSeaGreen1} incw (nn, z) & \cellcolor{Bisque1} sbcw y \\
 \hline
-bx & ldw y, mm & ldw y, \#ii & ldw y, (n, sp) & ldw y, (nn, z) & ldw y, (y) & ldw y, (n, y) & ldw y, x & ldw y, \#d & ldw (n, sp), y & swapop & ldw (nn, z), y & ldw x, y & cpw y, \#ii & jr \#d & popw y & xch f, (n, sp) \\
+bx & \cellcolor{DarkSeaGreen1} ldw y, mm & \cellcolor{DarkSeaGreen1} ldw y, \#ii & \cellcolor{DarkSeaGreen1} ldw y, (n, sp) & \cellcolor{DarkSeaGreen1} ldw y, (nn, z) & \cellcolor{DarkSeaGreen1} ldw y, (y) & \cellcolor{Bisque1} ldw y, (n, y) & \cellcolor{DarkSeaGreen1} ldw y, x & \cellcolor{DarkSeaGreen1} ldw y, \#d & \cellcolor{DarkSeaGreen1} ldw (n, sp), y & \cellcolor{DarkSeaGreen1} swapop & \cellcolor{DarkSeaGreen1} ldw (nn, z), y & \cellcolor{DarkSeaGreen1} ldw x, y & \cellcolor{Bisque1} cpw y, \#ii & \cellcolor{DarkSeaGreen1} jr \#d & \cellcolor{DarkSeaGreen1} popw y & \cellcolor{DarkSeaGreen1} xch f, (n, sp) \\
 \hline
-cx & ld xl, mm & ld (n, y), xl & ld xl, (n, sp) & ld xl, (nn, z) & ld xl, (n, y) & ld xl, (y) & ld xl, xh & ld xl, yl & ld xl, zl & ld xl, yh & ld xl, zh & ld mm, xl & ld (nn, z), xl & ld (n, sp), xl & ld (y), xl & bool xl \\
+cx & \cellcolor{DarkSeaGreen1} ld xl, mm & \cellcolor{Bisque1} ld (n, y), xl & \cellcolor{DarkSeaGreen1} ld xl, (n, sp) & \cellcolor{DarkSeaGreen1} ld xl, (nn, z) & \cellcolor{Bisque1} ld xl, (n, y) & \cellcolor{DarkSeaGreen1} ld xl, (y) & \cellcolor{DarkSeaGreen1} ld xl, xh & \cellcolor{DarkSeaGreen1} ld xl, yl & \cellcolor{DarkSeaGreen1} ld xl, zl & \cellcolor{DarkSeaGreen1} ld xl, yh & \cellcolor{DarkSeaGreen1} ld xl, zh & \cellcolor{DarkSeaGreen1} ld mm, xl & \cellcolor{DarkSeaGreen1} ld (nn, z), xl & \cellcolor{DarkSeaGreen1} ld (n, sp), xl & \cellcolor{DarkSeaGreen1} ld (y), xl & \cellcolor{DarkSeaGreen1} bool xl \\
 \hline
-dx & srl (n, sp) & srl mm & srl xl & srl (n, y) & sll (n, sp) & sll mm & sll xl & sll (n, y) & clr (n, sp) & clr mm & clr xl & clr (n, y) & tst (n, sp) & tst mm & tst xl & tst (n, y) \\
+dx & \cellcolor{DarkSeaGreen1} srl (n, sp) & \cellcolor{DarkSeaGreen1} srl mm & \cellcolor{DarkSeaGreen1} srl xl & \cellcolor{Bisque1} srl (n, y) & \cellcolor{DarkSeaGreen1} sll (n, sp) & \cellcolor{DarkSeaGreen1} sll mm & \cellcolor{DarkSeaGreen1} sll xl & \cellcolor{Bisque1} sll (n, y) & \cellcolor{DarkSeaGreen1} clr (n, sp) & \cellcolor{DarkSeaGreen1} clr mm & \cellcolor{DarkSeaGreen1} clr xl & \cellcolor{Bisque1} clr (n, y) & \cellcolor{DarkSeaGreen1} tst (n, sp) & \cellcolor{DarkSeaGreen1} tst mm & \cellcolor{DarkSeaGreen1} tst xl & \cellcolor{Bisque1} tst (n, y) \\
 \hline
-ex & orw y, mm & orw y, \#ii & orw y, (n, sp) & orw y, x & xchw y, (n, sp) & xchw x, (y) & rrcw (n, sp) & rlcw (n, sp) &  & ld xl, \#i & dnjnz yh, \#d & cax (y), zl, xl & altacc1 & ldw mm, y & altacc2 & rlcw y \\
+ex & \cellcolor{Bisque1} orw y, mm & \cellcolor{Bisque1} orw y, \#ii & \cellcolor{Bisque1} orw y, (n, sp) & \cellcolor{Bisque1} orw y, x & \cellcolor{Bisque1} xchw y, (n, sp) & \cellcolor{DarkSeaGreen1} xchw x, (y) & \cellcolor{Bisque1} rrcw (n, sp) & \cellcolor{Bisque1} rlcw (n, sp) & \cellcolor{white}  & \cellcolor{DarkSeaGreen1} ld xl, \#i & \cellcolor{Bisque1} dnjnz yh, \#d & \cellcolor{DarkSeaGreen1} cax (y), zl, xl & \cellcolor{DarkSeaGreen1} altacc1 & \cellcolor{DarkSeaGreen1} ldw mm, y & \cellcolor{DarkSeaGreen1} altacc2 & \cellcolor{Bisque1} rlcw y \\
 \hline
-fx & clrw (n, sp) & clrw mm & clrw (nn, z) & clrw y & rot xl, \#i & altacc4 & sra xl & da xl & caxw (y), z, x &  & mad x, (n, sp), yl & boolw y & push \#i & xorw y, \#ii & xorw y, (n, sp) & xorw y, x 
+fx & \cellcolor{DarkSeaGreen1} clrw (n, sp) & \cellcolor{DarkSeaGreen1} clrw mm & \cellcolor{DarkSeaGreen1} clrw (nn, z) & \cellcolor{DarkSeaGreen1} clrw y & \cellcolor{Bisque1} rot xl, \#i & \cellcolor{DarkSeaGreen1} altacc4 & \cellcolor{DarkSeaGreen1} sra xl & \cellcolor{DarkSeaGreen1} da xl & \cellcolor{DarkSeaGreen1} caxw (y), z, x & \cellcolor{white}  & \cellcolor{Bisque1} mad x, (n, sp), yl & \cellcolor{Bisque1} boolw y & \cellcolor{DarkSeaGreen1} push \#i & \cellcolor{Bisque1} xorw y, \#ii & \cellcolor{Bisque1} xorw y, (n, sp) & \cellcolor{Bisque1} xorw y, x 
 \end{tabular}
 \end{adjustbox}
-\end{center}
+Green: f8 and f8l. Orange: f8 only. Yellow: f8 and f8l, but swap prefix f8 only.
+\end{sidewaystable}
 
 \chapter{Peripherals}
 
